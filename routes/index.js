@@ -8,48 +8,51 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/login', function(req, res, next) {
+  res.redirect('/contacts/list')
 
-  let email = req.body.email;
-  let password = req.body.password;
-  let errors = false;
+  // let email = req.body.email;
+  // let password = req.body.password;
+  // let errors = false;
 
-  if(!email || !password ){
-    errors = true;
+  // if(!email || !password ){
+  //   errors = true;
 
-    req.flash('error', "Please fill in all fields");
+  //   req.flash('error', "Please fill in all fields");
 
-  }else if(!errors){
+  // }else if(!errors){
 
-    var form_data = {
-      email : email,
-      password : password,
-    }
+  //   var form_data = {
+  //     email : email,
+  //     password : password,
+  //   }
 
-    dbcon.query('SELECT * FROM users WHERE email = ' + email, function(err, rows, fields) {
-      if(err) throw err
+    
+
+    // dbcon.query('SELECT * FROM users WHERE email = ' + email, function(err, rows, fields) {
+    //   if(err) throw err
        
-      // if user not found
-      if (rows.length <= 0) {
-          req.flash('error', 'Email not found!')
-          res.redirect('/login')
-      }
-      // if number found
-      else {
-        let result_email = rows[0].email;
-        let result_pass = rows[0].password;
+    //   // if user not found
+    //   if (rows.length <= 0) {
+    //       req.flash('error', 'Email not found!')
+    //       res.redirect('/login')
+    //   }
+    //   // if number found
+    //   else {
+    //     let result_email = rows[0].email;
+    //     let result_pass = rows[0].password;
 
-        if(result_email === email){
-          if(result_pass == password){
-            req.flash('success', 'Welcome!')
-            res.redirect('/contacts/list')
-          }
-        }else{
-          req.flash('error', 'Email or password failed!')
-          res.redirect('/login')
-        }
-      }
-    })
-  }
+    //     if(result_email === email){
+    //       if(result_pass == password){
+    //         req.flash('success', 'Welcome!')
+    //         res.redirect('/contacts/list')
+    //       }
+    //     }else{
+    //       req.flash('error', 'Email or password failed!')
+    //       res.redirect('/login')
+    //     }
+    //   }
+    // })
+  //}
   
 
 });
